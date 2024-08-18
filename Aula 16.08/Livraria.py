@@ -1,46 +1,76 @@
 class Livro: 
-    def __init__ (self, titulo, autor): #Declarar "variaveis", sendo  obrigatorio o self
+    def __init__ (self, titulo, autor): 
         self.titulo = titulo
         self.autor = autor
-        #self.disponivel = disponivel
+        self.disponivel = True
 
-        #if self.autor == True:
-           # self.lista_disponivel = [self.disponivel]
+    def exibirDetalhes(self):
+        if self.disponivel:
+            disponibilidade = "Disponivel"
+        else:
+            disponibilidade = "Indisponivel"
+        print("Titulo: ",self.titulo,"\nAutor: ",self.autor,"\nDisponivel: ",disponibilidade)
 
 class Usuario: 
-    def __init__ (self, nome, LivrosDisponiveis): #Declarar "variaveis", sendo  obrigatorio o self
+    def __init__ (self, nome): 
         self.nome = nome
-        self.LivrosDisponiveis = [LivrosDisponiveis]
+        self.livrosEmprestados = []
+    def emprestarLivro(self,livro):
+        if livro.disponivel:
+            livro.disponivel = False
+            self.livrosEmprestados.append(livro)
+            print(self.nome," emprestou o livro ", livro.titulo)
+        else:
+            print("O livro ",livro.titulo, "Não está disponível")
+
+    def devolverLivro(self,livro):
+        if livro in self.livrosEmprestados:
+            livro.disponivel = True
+            self.livrosEmprestados.remove(livro)
+            print(self.nome," devolveu o livro ", livro.titulo)
+        else:
+            print("O livro ",livro.titulo, "não existe")
+    
 
 class Biblioteca: 
-    def __init__ (self, nome, livros): #Declarar "variaveis", sendo  obrigatorio o self
+    def __init__ (self, nome): 
         self.nome = nome
-        self.livros = [livros]
-
-class Livraria:
-    def __init__(self):
-        self.lista_livros = []
+        self.livros = []
     
-    def exibir_Detalhes(self,livro):
-        self.lista_livros.append(livro)
-    
-    def adicionar_Livro(self,livro):
-        self.lista_livros.append(livro)
-    
-    def livro_disponi(self,livrodispon):
-        self.lista_livros.append(livrodispon)
+    def adicionarLivro(self,livro):
+        self.livros.append(livro)
+        print(f"O livro: ",livro.titulo)
 
-livro1 = Livro("Pequeno Principe", "Maine")
-livro2 = Livro("Joao e Maria", "Agnes")
-livro3 = Livro("Programação I", "Augusto")
-livro4 = Livro("Programação II", "Gustavo")
+    def exibirLivrosDisponiveis(self):
+        print(f"Livros disponíveis na biblioteca:")
+        livros_disponiveis = [livro for livro in self.livros if livro.disponivel]
+        if livros_disponiveis:
+            for livro in livros_disponiveis:
+                livro.exibirDetalhes()
+        else:
+            print("Nenhum livro disponível.")
 
-livraria_do_site = Livraria()
-livraria_do_site.adicionar_Livro(livro1)
-livraria_do_site.adicionar_Livro(livro2)
-livraria_do_site.adicionar_Livro(livro3)
-livraria_do_site.adicionar_Livro(livro4)
+livro1 = Livro("Marley e Eu", "John Grogan")
+livro2 = Livro("A Culpa é Das Estrelas", "John Green")
+livro3 = Livro("A Bela e a Fera", "Gabrielle-Suzanne Barbot")
+biblioteca = Biblioteca("Biblioteca Central")
+usuario1 = Usuario("Maine")
+usuario2 = Usuario("Agnes")
 
-print("Total da compra: R$ ",
-    livraria_do_site.adicionar_Livro())
+print("Adicionar livros a biblioteca")
+biblioteca.adicionarLivro(livro1)
+biblioteca.adicionarLivro(livro2)
+biblioteca.adicionarLivro(livro3)
+print()
+
+biblioteca.exibirLivrosDisponiveis()
+print()
+usuario1.emprestarLivro(livro1)
+usuario1.emprestarLivro(livro2)
+print()
+biblioteca.exibirLivrosDisponiveis()
+print()
+usuario1.devolverLivro(livro1)
+print()
+biblioteca.exibirLivrosDisponiveis()
 
