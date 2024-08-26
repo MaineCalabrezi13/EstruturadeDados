@@ -1,0 +1,6 @@
+a - ultima_posicao
+b - 3
+c - 2
+d - S,T,C
+e - 2
+f - if (self.valores[i] == valor)
