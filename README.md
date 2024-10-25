@@ -11,4 +11,4 @@
 <h4>Aula 9: <a href="https://github.com/MaineCalabrezi13/EstruturadeDados/tree/main/Aula%2004.10">Recursão</h4>
 <h4>Aula 10: <a href="https://github.com/MaineCalabrezi13/EstruturadeDados/tree/main/Aula%2011.10">Algoritmos de ordenação 1</h4>
 <h4>Aula 11: <a href="">Algoritmos de ordenação 2</h4>
-
+<h4>Aula 12: <a href="">Árvores Binárias</h4>
